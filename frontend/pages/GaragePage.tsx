@@ -12,6 +12,8 @@ import { Wrench, Clock, DollarSign, Users } from "lucide-react";
 export default function GaragePage() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  
+  const garageImageUrl = "https://images.unsplash.com/photo-1650569664566-f0014dcf54e3?w=800&q=80";
 
   const [formData, setFormData] = useState({
     customerName: "",
@@ -81,11 +83,18 @@ export default function GaragePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Garage Services</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl">
-          Professional maintenance and repair services for your motorcycle
-        </p>
+      <div 
+        className="mb-12 rounded-2xl overflow-hidden h-64 bg-cover bg-center relative"
+        style={{ backgroundImage: `url('${garageImageUrl}')` }}
+      >
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+          <div className="text-center text-white px-4">
+            <h1 className="text-4xl font-bold mb-4">Garage Services</h1>
+            <p className="text-lg max-w-2xl">
+              Professional maintenance and repair services for your motorcycle
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8 mb-12">

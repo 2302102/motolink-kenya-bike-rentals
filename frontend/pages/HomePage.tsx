@@ -6,13 +6,19 @@ import { Bike, Map, Wrench, Shield, Award, Users } from "lucide-react";
 export default function HomePage() {
   return (
     <div>
-      <section className="relative bg-gradient-to-br from-primary/10 via-background to-primary/5 py-20 sm:py-32">
+      <section 
+        className="relative bg-gradient-to-br from-primary/10 via-background to-primary/5 py-20 sm:py-32 bg-cover bg-center"
+        style={{ 
+          backgroundImage: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1527437632069-fee7661b0e57?w=1600&q=80')",
+          backgroundBlendMode: "overlay"
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-white">
               Explore Kenya on Two Wheels
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-lg sm:text-xl text-gray-100 max-w-2xl mx-auto mb-8">
               Premium motorcycle rentals and guided tours across Kenya's most stunning landscapes.
               Your adventure starts here.
             </p>
@@ -23,7 +29,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link to="/tours">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 text-white border-white hover:bg-white/20">
                   View Tours
                 </Button>
               </Link>
