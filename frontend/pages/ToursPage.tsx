@@ -8,6 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar, Users, Star } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
+const fadeInUp = "animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0";
+const stagger = (index: number) => ({ animationDelay: `${index * 0.15}s` });
+
 export default function ToursPage() {
   const [tours, setTours] = useState<Tour[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,30 +59,54 @@ export default function ToursPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Guided Tours</h1>
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+      
+      <div className="mb-12 animate-[fadeInUp_0.6s_ease-out]">
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">Guided Tours</h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
           Discover Kenya's breathtaking landscapes with our expertly curated motorcycle tours
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {tours.map((tour) => (
-          <Card key={tour.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-            <div className="aspect-video bg-muted relative">
-              <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-                <div className="text-center">
-                  <div className="text-6xl mb-2">🏔️</div>
-                  <div className="text-sm font-medium">{tour.destination}</div>
-                </div>
+        {tours.map((tour, index) => (
+          <Card 
+            key={tour.id} 
+            className={`overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group ${fadeInUp}`}
+            style={stagger(index)}
+          >
+            <div className="aspect-video bg-muted relative overflow-hidden">
+              <img 
+                src={tour.imageUrl} 
+                alt={tour.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <div className="text-2xl font-bold">{tour.destination}</div>
               </div>
-              <Badge className={`absolute top-2 right-2 ${getDifficultyColor(tour.difficulty)}`}>
+              <Badge className={`absolute top-2 right-2 shadow-lg ${getDifficultyColor(tour.difficulty)}`}>
                 {tour.difficulty}
               </Badge>
+              <div className="absolute top-2 left-2 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+                <Calendar className="h-3 w-3" />
+                {tour.durationDays} days
+              </div>
             </div>
 
             <CardContent className="pt-6">
-              <h3 className="font-bold text-2xl mb-2">{tour.name}</h3>
+              <h3 className="font-bold text-2xl mb-2 group-hover:text-primary transition-colors">{tour.name}</h3>
               <p className="text-muted-foreground mb-4">{tour.description}</p>
 
               <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
@@ -113,7 +140,7 @@ export default function ToursPage() {
               </div>
 
               <div className="pt-4 border-t">
-                <div className="text-2xl font-bold text-primary">
+                <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                   KES {tour.price.toLocaleString()}
                   <span className="text-sm font-normal text-muted-foreground">/person</span>
                 </div>
@@ -122,7 +149,7 @@ export default function ToursPage() {
 
             <CardFooter>
               <Link to={`/booking/tour/${tour.id}`} className="w-full">
-                <Button className="w-full" disabled={!tour.available}>
+                <Button className="w-full group-hover:shadow-lg transition-shadow" disabled={!tour.available}>
                   {tour.available ? "Book Tour" : "Fully Booked"}
                 </Button>
               </Link>

@@ -14,6 +14,9 @@ export default function GaragePage() {
   const { toast } = useToast();
   
   const garageImageUrl = "https://images.unsplash.com/photo-1650569664566-f0014dcf54e3?w=800&q=80";
+  
+  const fadeInUp = "animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0";
+  const stagger = (index: number) => ({ animationDelay: `${index * 0.1}s` });
 
   const [formData, setFormData] = useState({
     customerName: "",
@@ -83,13 +86,25 @@ export default function GaragePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
       <div 
-        className="mb-12 rounded-2xl overflow-hidden h-64 bg-cover bg-center relative"
+        className="mb-12 rounded-2xl overflow-hidden h-64 bg-cover bg-center relative animate-[fadeInUp_0.6s_ease-out]"
         style={{ backgroundImage: `url('${garageImageUrl}')` }}
       >
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
           <div className="text-center text-white px-4">
-            <h1 className="text-4xl font-bold mb-4">Garage Services</h1>
+            <h1 className="text-4xl font-bold mb-4 animate-[fadeInUp_0.8s_ease-out]">Garage Services</h1>
             <p className="text-lg max-w-2xl">
               Professional maintenance and repair services for your motorcycle
             </p>
@@ -102,10 +117,10 @@ export default function GaragePage() {
           <h2 className="text-2xl font-bold">Our Services</h2>
           <div className="grid gap-4">
             {services.map((service, idx) => (
-              <Card key={idx}>
+              <Card key={idx} className={`hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${fadeInUp}`} style={stagger(idx)}>
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 hover:bg-primary/20 transition-colors">
                       <service.icon className="h-6 w-6 text-primary" />
                     </div>
                     <div className="flex-1">
@@ -119,7 +134,7 @@ export default function GaragePage() {
             ))}
           </div>
 
-          <Card className="bg-muted/50">
+          <Card className={`bg-muted/50 hover:shadow-lg transition-shadow ${fadeInUp}`} style={stagger(4)}>
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
                 <Users className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
@@ -137,9 +152,9 @@ export default function GaragePage() {
         </div>
 
         <div>
-          <Card>
+          <Card className="hover:shadow-xl transition-shadow animate-[fadeInUp_0.8s_ease-out]">
             <CardHeader>
-              <CardTitle>Request Service</CardTitle>
+              <CardTitle className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">Request Service</CardTitle>
               <CardDescription>
                 Fill out the form below and we'll get back to you within 24 hours
               </CardDescription>
@@ -222,7 +237,7 @@ export default function GaragePage() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full hover:scale-105 transition-transform" disabled={loading}>
                   {loading ? "Submitting..." : "Submit Request"}
                 </Button>
               </form>

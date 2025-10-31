@@ -6,6 +6,32 @@ import { Bike, Map, Wrench, Shield, Award, Users } from "lucide-react";
 export default function HomePage() {
   return (
     <div>
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+      `}</style>
       <section 
         className="relative bg-gradient-to-br from-primary/10 via-background to-primary/5 py-20 sm:py-32 bg-cover bg-center"
         style={{ 
@@ -15,21 +41,21 @@ export default function HomePage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-white">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-white animate-[fadeInUp_0.8s_ease-out]">
               Explore Kenya on Two Wheels
             </h1>
-            <p className="text-lg sm:text-xl text-gray-100 max-w-2xl mx-auto mb-8">
+            <p className="text-lg sm:text-xl text-gray-100 max-w-2xl mx-auto mb-8 animate-[fadeInUp_1s_ease-out]">
               Premium motorcycle rentals and guided tours across Kenya's most stunning landscapes.
               Your adventure starts here.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-[fadeInUp_1.2s_ease-out]">
               <Link to="/bikes">
-                <Button size="lg" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto hover:scale-105 transition-transform duration-200">
                   Browse Bikes
                 </Button>
               </Link>
               <Link to="/tours">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 text-white border-white hover:bg-white/20">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 text-white border-white hover:bg-white/20 hover:scale-105 transition-transform duration-200">
                   View Tours
                 </Button>
               </Link>
@@ -40,17 +66,17 @@ export default function HomePage() {
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Why Choose MotoLink Kenya?</h2>
+          <div className="text-center mb-12 animate-[fadeInUp_0.6s_ease-out]">
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">Why Choose MotoLink Kenya?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               We provide exceptional service and unforgettable experiences for motorcycle enthusiasts
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="border-2 hover:border-primary/50 transition-colors">
+            <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group animate-[fadeInUp_0.6s_ease-out] opacity-0" style={{animationDelay: '0.1s', animationFillMode: 'forwards'}}>
               <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors group-hover:animate-[float_2s_ease-in-out_infinite]">
                   <Bike className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Premium Fleet</h3>
@@ -60,9 +86,9 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary/50 transition-colors">
+            <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group animate-[fadeInUp_0.6s_ease-out] opacity-0" style={{animationDelay: '0.2s', animationFillMode: 'forwards'}}>
               <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors group-hover:animate-[float_2s_ease-in-out_infinite]">
                   <Map className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Guided Tours</h3>
@@ -72,9 +98,9 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary/50 transition-colors">
+            <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group animate-[fadeInUp_0.6s_ease-out] opacity-0" style={{animationDelay: '0.3s', animationFillMode: 'forwards'}}>
               <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors group-hover:animate-[float_2s_ease-in-out_infinite]">
                   <Wrench className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Garage Services</h3>
@@ -84,9 +110,9 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary/50 transition-colors">
+            <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group animate-[fadeInUp_0.6s_ease-out] opacity-0" style={{animationDelay: '0.4s', animationFillMode: 'forwards'}}>
               <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors group-hover:animate-[float_2s_ease-in-out_infinite]">
                   <Shield className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">24/7 Emergency Support</h3>
@@ -96,9 +122,9 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary/50 transition-colors">
+            <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group animate-[fadeInUp_0.6s_ease-out] opacity-0" style={{animationDelay: '0.5s', animationFillMode: 'forwards'}}>
               <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors group-hover:animate-[float_2s_ease-in-out_infinite]">
                   <Award className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Competitive Prices</h3>
@@ -108,9 +134,9 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary/50 transition-colors">
+            <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group animate-[fadeInUp_0.6s_ease-out] opacity-0" style={{animationDelay: '0.6s', animationFillMode: 'forwards'}}>
               <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors group-hover:animate-[float_2s_ease-in-out_infinite]">
                   <Users className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Expert Team</h3>
@@ -158,10 +184,10 @@ export default function HomePage() {
               </p>
               <div className="space-y-3">
                 <Link to="/bikes">
-                  <Button className="w-full">Rent a Bike</Button>
+                  <Button className="w-full hover:scale-105 transition-transform">Rent a Bike</Button>
                 </Link>
                 <Link to="/tours">
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full hover:scale-105 transition-transform">
                     Book a Tour
                   </Button>
                 </Link>

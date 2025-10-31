@@ -13,6 +13,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 export default function SOSPage() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  
+  const fadeInUp = "animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0";
+  const stagger = (index: number) => ({ animationDelay: `${index * 0.1}s` });
 
   const [formData, setFormData] = useState({
     name: "",
@@ -53,14 +56,30 @@ export default function SOSPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4 text-destructive">Emergency SOS</h1>
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
+          50% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.8); }
+        }
+      `}</style>
+      <div className="mb-8 animate-[fadeInUp_0.6s_ease-out]">
+        <h1 className="text-4xl font-bold mb-4 text-destructive animate-pulse">Emergency SOS</h1>
         <p className="text-lg text-muted-foreground">
           24/7 emergency assistance for riders in need
         </p>
       </div>
 
-      <Alert variant="destructive" className="mb-8">
+      <Alert variant="destructive" className="mb-8 animate-[pulse-glow_2s_ease-in-out_infinite] animate-[fadeInUp_0.8s_ease-out]">
         <AlertCircle className="h-5 w-5" />
         <AlertTitle>Emergency Hotline</AlertTitle>
         <AlertDescription>
@@ -75,10 +94,10 @@ export default function SOSPage() {
       </Alert>
 
       <div className="grid md:grid-cols-2 gap-8 mb-8">
-        <Card className="bg-background">
+        <Card className={`bg-background hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${fadeInUp}`} style={stagger(0)}>
           <CardContent className="pt-6">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center flex-shrink-0 hover:bg-destructive/20 transition-colors">
                 <Clock className="h-6 w-6 text-destructive" />
               </div>
               <div>
@@ -91,10 +110,10 @@ export default function SOSPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-background">
+        <Card className={`bg-background hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${fadeInUp}`} style={stagger(1)}>
           <CardContent className="pt-6">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center flex-shrink-0 hover:bg-destructive/20 transition-colors">
                 <MapPin className="h-6 w-6 text-destructive" />
               </div>
               <div>
@@ -108,9 +127,9 @@ export default function SOSPage() {
         </Card>
       </div>
 
-      <Card>
+      <Card className="hover:shadow-2xl transition-shadow animate-[fadeInUp_1s_ease-out]">
         <CardHeader>
-          <CardTitle>Submit Emergency Request</CardTitle>
+          <CardTitle className="text-destructive">Submit Emergency Request</CardTitle>
           <CardDescription>
             Fill out this form if you need immediate assistance
           </CardDescription>
@@ -184,7 +203,7 @@ export default function SOSPage() {
               />
             </div>
 
-            <Button type="submit" className="w-full" variant="destructive" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-transform animate-pulse" variant="destructive" disabled={loading}>
               {loading ? "Sending SOS..." : "Send Emergency Request"}
             </Button>
 
@@ -195,7 +214,7 @@ export default function SOSPage() {
         </CardContent>
       </Card>
 
-      <Card className="mt-8 bg-muted/50">
+      <Card className="mt-8 bg-muted/50 hover:shadow-lg transition-shadow animate-[fadeInUp_1.2s_ease-out]">
         <CardHeader>
           <CardTitle className="text-lg">What to Expect</CardTitle>
         </CardHeader>

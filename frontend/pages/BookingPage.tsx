@@ -15,6 +15,8 @@ export default function BookingPage() {
   const { type, id } = useParams<{ type: string; id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
+  
+  const fadeInUp = "animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0";
 
   const [item, setItem] = useState<Bike | Tour | null>(null);
   const [loading, setLoading] = useState(true);
@@ -118,11 +120,24 @@ export default function BookingPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 className="text-3xl font-bold mb-8">Complete Your Booking</h1>
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+      
+      <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent animate-[fadeInUp_0.6s_ease-out]">Complete Your Booking</h1>
 
       <div className="grid md:grid-cols-2 gap-8">
         <div>
-          <Card>
+          <Card className="hover:shadow-xl transition-shadow animate-[fadeInUp_0.8s_ease-out]">
             <CardHeader>
               <CardTitle>
                 {isBike ? "Bike" : "Tour"} Details
@@ -180,9 +195,9 @@ export default function BookingPage() {
         </div>
 
         <div>
-          <Card>
+          <Card className="hover:shadow-xl transition-shadow animate-[fadeInUp_1s_ease-out]">
             <CardHeader>
-              <CardTitle>Your Information</CardTitle>
+              <CardTitle className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">Your Information</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -280,7 +295,7 @@ export default function BookingPage() {
                   </div>
                 )}
 
-                <Button type="submit" className="w-full" disabled={submitting || total === 0}>
+                <Button type="submit" className="w-full hover:scale-105 transition-transform" disabled={submitting || total === 0}>
                   {submitting ? "Processing..." : "Confirm Booking"}
                 </Button>
 
